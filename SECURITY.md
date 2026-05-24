@@ -12,7 +12,7 @@ FakeSite Hunter is a research and educational project. The following apply:
 
 Please do **not** open a public GitHub issue for security vulnerabilities.
 
-Send a private report to: **fakesitehunter@gmail.com**
+Send a private report to: **hunterfakesite@gmail.com**
 
 Include:
 - Description of the issue
