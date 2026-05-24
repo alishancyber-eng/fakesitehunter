@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FakeSite Hunter — AI Phishing & Homograph Detection</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <span class="logo-text">FakeSite<span class="logo-highlight">Hunter</span></span>
+            </div>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/how-it-works.html">How It Works</a>
+                <a href="/contact.html">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="/" onclick="toggleMobileMenu()">Home</a>
+            <a href="/about.html" onclick="toggleMobileMenu()">About</a>
+            <a href="/how-it-works.html" onclick="toggleMobileMenu()">How It Works</a>
+            <a href="/contact.html" onclick="toggleMobileMenu()">Contact</a>
+            <a href="/privacy-policy.html" onclick="toggleMobileMenu()">Privacy Policy</a>
+            <a href="/terms-of-service.html" onclick="toggleMobileMenu()">Terms of Service</a>
+            <a href="/consent-agreement.html" onclick="toggleMobileMenu()">Consent Agreement</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <canvas id="particleCanvas"></canvas>
+        <div class="hero-glow hero-glow-1"></div>
+        <div class="hero-glow hero-glow-2"></div>
+
+        <div class="container hero-content">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                AI-Powered Threat Detection
+            </div>
+
+            <h1 class="hero-title">
+                Detect <span class="gradient-text">Homograph</span> &<br>
+                <span class="gradient-text">Phishing</span> Attacks
+            </h1>
+
+            <p class="hero-description">
+                Phishing websites disguise themselves using deceptive URLs, Unicode tricks,
+                and visual spoofing. FakeSite Hunter analyzes every URL through advanced AI
+                to expose threats before they cause harm.
+            </p>
+
+            <!-- ENGINE BADGES -->
+            <div class="engine-badges">
+                <div class="engine-badge">
+                    <span class="engine-dot dot-blue"></span>
+                    URL Analysis
+                </div>
+                <div class="engine-badge">
+                    <span class="engine-dot dot-purple"></span>
+                    Content Analysis
+                </div>
+                <div class="engine-badge">
+                    <span class="engine-dot dot-cyan"></span>
+                    Visual Analysis
+                </div>
+            </div>
+
+            <!-- SCAN BOX -->
+            <div class="scan-box">
+                <div class="scan-input-wrapper">
+                    <div class="input-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </div>
+                    <input
+                        type="text"
+                        id="urlInput"
+                        class="scan-input"
+                        placeholder="Enter any URL to scan — e.g. https://paypal.com"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="scan-btn" id="scanBtn" onclick="scanURL()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span class="btn-text">Scan URL</span>
+                        <span class="btn-loader" id="btnLoader"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- RESULT AREA -->
+            <div class="result-container" id="resultContainer">
+
+                <!-- 1. PHISHING -->
+                <div class="result-card result-phishing" id="resultPhishing">
+                    <div class="result-icon-circle result-icon-danger">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="result-label result-label-danger">⚠ PHISHING DETECTED</div>
+                    <div class="result-confidence" id="phishConfidence"></div>
+                    <div class="result-url" id="phishURL"></div>
+                    <div class="result-engines" id="phishEngines"></div>
+                    <div class="result-message result-message-danger">
+                        Our AI analysis indicates this URL exhibits characteristics of a phishing
+                        or homograph attack. It may be impersonating a legitimate brand to steal
+                        sensitive information. <strong>Do not enter any personal data on this website.</strong>
+                    </div>
+                </div>
+
+                <!-- 2. SUSPICIOUS -->
+                <div class="result-card result-suspicious" id="resultSuspicious">
+                    <div class="result-icon-circle result-icon-warn">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div class="result-label result-label-warn">⚠ SUSPICIOUS</div>
+                    <div class="result-confidence" id="suspConfidence"></div>
+                    <div class="result-url" id="suspURL"></div>
+                    <div class="result-engines" id="suspEngines"></div>
+                    <div class="result-message result-message-warn">
+                        This URL shows some suspicious characteristics but could not be confirmed
+                        as phishing with high confidence. <strong>Exercise caution</strong> and avoid
+                        entering sensitive information.
+                    </div>
+                </div>
+
+                <!-- 3. LEGITIMATE -->
+                <div class="result-card result-legitimate" id="resultLegitimate">
+                    <div class="result-icon-circle result-icon-safe">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="result-label result-label-safe">✓ LEGITIMATE</div>
+                    <div class="result-confidence" id="legitConfidence"></div>
+                    <div class="result-url" id="legitURL"></div>
+                    <div class="result-engines" id="legitEngines"></div>
+                    <div class="result-message result-message-safe">
+                        Our AI analysis found no phishing or homograph indicators in this URL.
+                        The website appears genuine and safe to visit. Always exercise caution
+                        when sharing personal information online.
+                    </div>
+                </div>
+
+                <!-- 4. UNKNOWN -->
+                <div class="result-card result-unknown" id="resultUnknown">
+                    <div class="result-icon-circle result-icon-unknown">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="result-label result-label-unknown">? UNKNOWN</div>
+                    <div class="result-url" id="unknownURL"></div>
+                    <div class="result-message result-message-unknown">
+                        Could not determine the safety of this URL. The website may use
+                        uncommon technologies or the analysis was inconclusive.
+                        <strong>Proceed with caution.</strong>
+                    </div>
+                </div>
+
+                <!-- 5. ERROR -->
+                <div class="result-card result-error" id="resultError">
+                    <div class="result-icon-circle result-icon-error">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="result-label result-label-error">LINK DOES NOT EXIST</div>
+                    <div class="result-url" id="errorURL"></div>
+                    <div class="result-message result-message-error" id="errorMsg">
+                        The URL could not be reached. The website may be offline, the domain
+                        may not exist, or the server is not responding.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════ Feature Badges (Static — Always Shows) ══════ -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-value">AI</div>
+                    <div class="feature-label">POWERED</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-value">Real‑Time</div>
+                    <div class="feature-label">ANALYSIS</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-value">Multi-Layered</div>
+                    <div class="feature-label">DETECTION</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-value">Free</div>
+                    <div class="feature-label">TO USE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════ Live Stats (Dynamic — From Backend) ══════ -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="statTotalScans">—</div>
+                    <div class="stat-label">TOTAL SCANS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="statTodayScans">—</div>
+                    <div class="stat-label">TODAY</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="statPhishDetected">—</div>
+                    <div class="stat-label">THREATS FOUND</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="statVisitors">—</div>
+                    <div class="stat-label">VISITORS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECENT SCANS -->
+    <section class="section recent-scans-section" id="recent-scans">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Live Activity</div>
+                <h2 class="section-title">Recent Scans</h2>
+                <p class="section-subtitle">
+                    Latest URLs analyzed by FakeSite Hunter in real time.
+                </p>
+            </div>
+            <div class="recent-scans-list" id="recentScansList">
+                <div class="recent-empty">No scans yet. Be the first to scan a URL above.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div class="footer-left">
+                <div class="logo">
+                    <div class="logo-icon logo-icon-sm">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">FakeSite<span class="logo-highlight">Hunter</span></span>
+                </div>
+                <p class="footer-desc">
+                    AI-powered phishing and homograph attack detection.<br>
+                    Protecting users from deceptive websites.
+                </p>
+            </div>
+
+            <div class="footer-right">
+                <div>
+                    <p style="font-size:12px;color:#9ca3af;margin-bottom:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;">Company</p>
+                    <a href="/about.html">About</a><br>
+                    <a href="/how-it-works.html">How It Works</a><br>
+                    <a href="/contact.html">Contact</a>
+                </div>
+                <div>
+                    <p style="font-size:12px;color:#9ca3af;margin-bottom:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;">Legal</p>
+                    <a href="/privacy-policy.html">Privacy Policy</a><br>
+                    <a href="/terms-of-service.html">Terms of Service</a><br>
+                    <a href="/consent-agreement.html">Consent Agreement</a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 FakeSite Hunter. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

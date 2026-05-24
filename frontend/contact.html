@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — FakeSite Hunter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:'Inter',sans-serif;
+      background:#060610;
+      color:#e5e7eb;
+      overflow-x:hidden;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1150px;margin:0 auto;padding:0 22px}
+
+    /* Header */
+    .header{
+      position:sticky;top:0;z-index:50;
+      background:rgba(6,6,16,.78);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .header-inner{
+      height:68px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-icon{
+      width:34px;height:34px;border-radius:10px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#6366f1,#06b6d4);
+      color:#fff;box-shadow:0 0 20px rgba(99,102,241,.35);
+      font-size:15px;
+    }
+    .logo-text{font-size:20px;font-weight:800;color:#fff}
+    .logo-highlight{
+      background:linear-gradient(135deg,#818cf8,#06b6d4);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .nav{display:flex;gap:24px}
+    .nav a{color:#9ca3af;font-size:14px;font-weight:500}
+    .nav a:hover{color:#fff}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:92px 0 72px;
+      text-align:center;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(99,102,241,.16), transparent 42%),
+        radial-gradient(circle at 88% 80%, rgba(6,182,212,.14), transparent 40%),
+        #060610;
+      overflow:hidden;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 16px;border-radius:999px;
+      background:rgba(99,102,241,.10);
+      border:1px solid rgba(99,102,241,.25);
+      color:#a78bfa;font-size:12px;font-weight:700;
+      letter-spacing:.7px;text-transform:uppercase;
+      margin-bottom:16px;
+    }
+    .dot{
+      width:7px;height:7px;border-radius:50%;
+      background:#22c55e;box-shadow:0 0 8px #22c55e;
+    }
+    .hero h1{
+      margin:0 0 12px;
+      font-size:52px;font-weight:900;line-height:1.1;color:#fff;letter-spacing:-1.5px;
+    }
+    .gradient{
+      background:linear-gradient(135deg,#818cf8,#06b6d4);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .hero p{
+      max-width:760px;margin:0 auto;
+      color:#9ca3af;font-size:17px;line-height:1.8;
+    }
+
+    /* Cards */
+    .section{padding:74px 0}
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:22px;
+    }
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:26px 22px;
+      transition:.3s ease;
+      text-align:center;
+    }
+    .card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(99,102,241,.28);
+      box-shadow:0 18px 46px rgba(99,102,241,.12);
+    }
+    .icon{
+      width:52px;height:52px;margin:0 auto 14px;
+      border-radius:14px;
+      display:grid;place-items:center;
+      background:rgba(99,102,241,.12);
+      color:#a78bfa;font-size:23px;
+    }
+    .card h3{
+      margin:0 0 10px;font-size:18px;color:#fff;
+    }
+    .card p{
+      margin:0;color:#9ca3af;font-size:14px;line-height:1.7;
+    }
+    .card a{
+      color:#93c5fd;font-weight:600;
+      word-break:break-word;
+    }
+
+    /* Contact form style block */
+    .form-wrap{
+      margin-top:26px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:24px;
+    }
+    .form-title{
+      margin:0 0 14px;color:#fff;font-size:22px;font-weight:800;
+    }
+    .form-grid{
+      display:grid;grid-template-columns:1fr 1fr;gap:14px;
+    }
+    .field{
+      width:100%;
+      background:#0d1120;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:12px;
+      color:#e5e7eb;
+      padding:12px 13px;
+      font-size:14px;outline:none;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .field:focus{
+      border-color:rgba(99,102,241,.55);
+      box-shadow:0 0 0 3px rgba(99,102,241,.15);
+    }
+    textarea.field{
+      min-height:120px;resize:vertical;
+      grid-column:1/-1;
+    }
+    .btn{
+      margin-top:12px;
+      border:none;cursor:pointer;
+      padding:12px 18px;border-radius:12px;
+      color:#fff;font-weight:700;
+      background:linear-gradient(135deg,#6366f1,#06b6d4);
+    }
+    .note{
+      margin-top:10px;font-size:12px;color:#6b7280;
+    }
+
+    .footer{
+      border-top:1px solid rgba(255,255,255,.06);
+      padding:20px 0 30px;
+      text-align:center;color:#6b7280;font-size:13px;
+    }
+
+    @media (max-width:980px){
+      .hero h1{font-size:40px}
+      .grid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:700px){
+      .nav{display:none}
+      .hero{padding:72px 0 52px}
+      .hero h1{font-size:31px}
+      .hero p{font-size:15px}
+      .section{padding:56px 0}
+      .grid{grid-template-columns:1fr}
+      .form-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">✉️</div>
+        <span class="logo-text">FakeSite<span class="logo-highlight">Hunter</span></span>
+      </a>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/how-it-works.html">How It Works</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="badge"><span class="dot"></span> We’re Here to Help</div>
+      <h1>Get in <span class="gradient">Touch</span></h1>
+      <p>
+        Have questions, feedback, or want to report a suspicious phishing URL?
+        Reach out and our team will assist you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid">
+        <div class="card">
+          <div class="icon">📧</div>
+          <h3>Email</h3>
+          <p><a href="mailto:fakesitehunter@gmail.com">fakesitehunter@gmail.com</a></p>
+        </div>
+        <div class="card">
+          <div class="icon">📍</div>
+          <h3>Location</h3>
+          <p>Pakistan</p>
+        </div>
+        <div class="card">
+          <div class="icon">🌐</div>
+          <h3>Social</h3>
+          <p>@fakesitehunter</p>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <h2 class="form-title">Send us a message</h2>
+        <!-- Frontend-only demo form -->
+        <form onsubmit="event.preventDefault(); alert('Thanks! Your message has been noted.');">
+          <div class="form-grid">
+            <input class="field" type="text" placeholder="Your Name" required />
+            <input class="field" type="email" placeholder="Your Email" required />
+            <textarea class="field" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button class="btn" type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    © 2026 FakeSite Hunter. All rights reserved.
+  </div>
+</body>
+</html>

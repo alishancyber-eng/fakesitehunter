@@ -1,0 +1,23 @@
+# FakeSite Hunter — Python Dependencies
+#
+# Install with: pip install -r requirements.txt
+#
+# Notes:
+# - torch and torchvision are CPU builds for the server. For GPU (CUDA 12.8),
+#   replace with torch==2.10.0+cu128 and install from the PyTorch index URL.
+# - efficientnet-pytorch (hyphen) is the correct package name.
+
+torch==2.10.0
+torchvision==0.25.0
+efficientnet-pytorch==0.7.1
+numpy==2.0.2
+Pillow==11.3.0
+scikit-learn==1.6.1
+Flask>=3.0.0
+flask-cors>=4.0.0
+selenium==4.41.0
+webdriver-manager==4.0.2
+tldextract>=5.1.0
+idna==3.11
+joblib>=1.3.0
+nltk>=3.8.0

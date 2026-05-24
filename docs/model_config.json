@@ -1,0 +1,121 @@
+{
+  "engine_version": "13.5",
+  "save_date": "2026-02-28",
+  "environment": {
+    "python": "3.12.12",
+    "torch": "2.10.0+cu128",
+    "numpy": "2.0.2",
+    "sklearn": "1.6.1",
+    "device": "CUDA"
+  },
+  "architecture": {
+    "name": "CNN(k3+k5) + BiGRU(64x2) + Transformer(4h,1L)",
+    "vocab_size": 161,
+    "embed_dim": 64,
+    "num_features": 28,
+    "gru_hidden": 64,
+    "cnn_filters": 96,
+    "tfm_heads": 4,
+    "tfm_layers": 1,
+    "tfm_ff": 256,
+    "dropout": 0.2,
+    "max_len": 200,
+    "num_params": 281185
+  },
+  "training": {
+    "split": "70% train / 15% val / 15% test",
+    "train_samples": 69885,
+    "test_samples": 20088,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "label_smoothing": 0.03,
+    "loss": "BCEWithLogitsLoss",
+    "early_stopping_patience": 15,
+    "note": "DO NOT retrain on 100% \u2014 metrics would be invalidated"
+  },
+  "thresholds": {
+    "model_default": 0.5,
+    "english_route": 0.88,
+    "ascii_zd_route": 0.4,
+    "hard_safe_model_override": 0.9,
+    "brand_floor_tier1": 0.8,
+    "brand_floor_tier2": 0.65,
+    "brand_floor_tier3": 0.5,
+    "brand_floor_tier4": 0.4,
+    "min_brand_length_for_floor": 4
+  },
+  "routes": {
+    "hard_phish": "Non-ASCII character detected \u2014 instant PHISH",
+    "hard_safe": "Domain in Tranco safe list \u2014 instant SAFE",
+    "brand_override": "ASCII brand impersonation \u2014 forced minimum confidence",
+    "english": "Domain is English word \u2014 raised threshold to prevent FP",
+    "ascii_zd": "Suspicious leet substitutions \u2014 model with lower threshold",
+    "model": "Pure ML model decision",
+    "model_override_safe": "Model overrides safe gate (raw >= 0.90)",
+    "error": "Invalid input \u2014 graceful failure"
+  },
+  "metrics": {
+    "auc": 0.995102,
+    "f1": 0.971477,
+    "precision": 0.975661,
+    "recall": 0.967329,
+    "safe_recall": 0.975744,
+    "phish_recall": 0.967329,
+    "fp": 243,
+    "fn": 329,
+    "fp_rate_percent": 2.43,
+    "ece": 0.006177,
+    "accuracy": 0.971525,
+    "throughput_urls_per_sec": 291
+  },
+  "attack_recall": {
+    "bidi_override": 1.0,
+    "idn_armenian_georgian": 1.0,
+    "idn_cyrillic": 1.0,
+    "idn_greek": 1.0,
+    "idn_mixed_script": 1.0,
+    "zero_width": 1.0,
+    "syntax_spoofing": 1.0,
+    "whole_script_substitution": 0.9988,
+    "unicode_confusable": 0.9964,
+    "punycode_encoded": 0.9959,
+    "visual_ascii_homoglyph": 0.8673,
+    "multi_char_ascii_homoglyph": 0.7897
+  },
+  "known_limitations": [
+    "ASCII compression (rn\u2192m) on non-brand domains: 78.97% recall",
+    "ASCII visual substitution (0\u2192o) on non-brand domains: 86.73% recall",
+    "These 301 FNs require Engines 2-4 for coverage"
+  ],
+  "files": {
+    "essential": {
+      "engine1_homograph_v13_5.pth": "Neural network weights",
+      "tokenizer.json": "Character-to-number mapping",
+      "calibrator.pkl": "Probability calibration",
+      "feature_stats.npz": "Feature normalization (mean/std)",
+      "model_config.json": "This file \u2014 architecture + settings"
+    },
+    "important": {
+      "brand_db.json": "8,940 brands for impersonation detection",
+      "english_dict.txt": "234K words for false positive prevention",
+      "tranco_safe_list.csv": "1M domains for safe domain detection"
+    },
+    "backup": {
+      "engine1_full_model_v13_5.pth": "Complete model (architecture + weights)"
+    }
+  },
+  "integration": {
+    "load_model": "test_model = HomographNet(vocab_size=161); test_model.load_state_dict(checkpoint['model_state_dict'])",
+    "required_packages": [
+      "torch",
+      "numpy",
+      "scikit-learn",
+      "tldextract",
+      "idna"
+    ],
+    "gpu_required": false,
+    "min_ram_mb": 200,
+    "inference_latency_ms": 3.5
+  }
+}

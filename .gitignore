@@ -1,0 +1,98 @@
+# ── Python ────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+*.so
+
+# ── Virtual environments ──────────────────────────────────────
+venv/
+env/
+.venv/
+.env_local/
+
+# ── Environment files ─────────────────────────────────────────
+.env
+.env.local
+.env.production
+# Keep .env.example committed
+
+# ── ML model weights (too large for Git) ─────────────────────
+# Use Git LFS or manual placement — see scripts/download_models.sh
+*.pth
+*.pt
+*.pkl
+*.npz
+*.h5
+*.onnx
+*.bin
+# Exceptions: if you want to commit small config files
+!docs/model_config.json
+
+# ── Datasets and data files ───────────────────────────────────
+*.csv
+*.tsv
+# Exceptions: small reference files that are safe to commit
+# (none currently — tranco CSV is 21MB, too large)
+
+# ── SQLite databases ──────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Logs ──────────────────────────────────────────────────────
+logs/
+logs_v*/
+*.log
+*.jsonl
+
+# ── Jupyter Notebook checkpoints ─────────────────────────────
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ── Selenium / browser artifacts ─────────────────────────────
+*.png
+/tmp/*.png
+pipeline_screenshot.png
+pipeline_shot.png
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDEs ─────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Testing artifacts ─────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── Google Colab artifacts ────────────────────────────────────
+# (notebooks are committed, but not Colab-generated outputs)
+models_v*/
+FakeSite_Engine1_API/
+FakeSite_Engine1_API.zip
